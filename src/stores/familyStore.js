@@ -219,12 +219,12 @@ export const useFamilyStore = defineStore('family', () => {
 
       // Calcular risco localmente para exibição imediata (Offline-First)
       const weight3 = ((sanitized.bedriddenCount || 0) + (sanitized.physicalDisabilityCount || 0) + (sanitized.mentalDisabilityCount || 0) + (sanitized.severeMalnutritionCount || 0)) * 3;
-      const weight2 = ((sanitized.drugAddictionCount || 0) + (sanitized.unemployedCount || 0) + (sanitized.illiterateCount || 0) + (sanitized.under6MonthsCount || 0) + (sanitized.over70YearsCount || 0)) * 2;
-      const weight1 = ((sanitized.hypertensionCount || 0) + (sanitized.diabetesCount || 0)) * 1 + (!sanitized.basicSanitation ? 3 : 0);
+      const weight2 = ((sanitized.drugAddictionCount || 0) + (sanitized.unemployedCount || 0)) * 2;
+      const weight1 = ((sanitized.hypertensionCount || 0) + (sanitized.diabetesCount || 0) + (sanitized.illiterateCount || 0) + (sanitized.under6MonthsCount || 0) + (sanitized.over70YearsCount || 0)) * 1 + (!sanitized.basicSanitation ? 3 : 0);
       const individualsCount = family.membros_declarados || 1;
       const roomsCount = sanitized.roomsCount || 1;
       const ratio = individualsCount / roomsCount;
-      let ratioPoints = ratio < 1 ? 0 : (ratio === 1 ? 1 : 2);
+      let ratioPoints = ratio < 1 ? 0 : (ratio === 1 ? 2 : 3);
       const finalScoreLocal = weight3 + weight2 + weight1 + ratioPoints;
       let riskClassLocal = 'Risco Baixo';
       if (finalScoreLocal >= 9) riskClassLocal = 'Risco Máximo';
